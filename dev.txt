@@ -1,0 +1,85 @@
+-------------------
+OK
+-------------------
+
+Run Fast
+Guan Pai
+Big2
+Blood
+
+-----------------
+In Dev
+---------------
+
+Shanghai Landlord:
+autoscore
+bomb detection / counter
+change counter
+bug stake 4
+timer SET (undoTimer + PassTimer)
+meld sort (?)
+
+
+-----------------
+Later
+---------------
+
+ShouBaYi:
+bomb detection
+
+Dalian Empress:
+all
+
+Guan Dan:
+autoscore
+tribute
+new scoring A1/2/3
+timer SET (undoTimer + PassTimer)
+
+Bao Huang:
+autoscore
+tribute
+timer SET (undoTimer + PassTimer)
+bug mainColor Emperor Seat
+meld sort
+
+Wild Escape:
+autoscore
+tribute
+timer SET (undoTimer + PassTimer)
+
+
+
+--------------------
+Memo code
+---------------------
+
+dealB
+debut manquant? (Big2, Blood, Guan Pai, Run Fast):
+
+ {
+      "func": "SELECT",
+      "property": "id",
+      "value": "gameSettings",
+      "collection": "gameSettings"
+    },
+    {
+      "func": "GET",
+      "collection": "gameSettings",
+      "property": "multiCardMeldsEnabled",
+      "variable": "multiCardMeldsEnabled"
+    },
+
+------------------------
+
+
+timer SET
+
+ {
+      "func": "SET",
+      "collection": [
+        "thisButton"
+      ],
+      "property": "paused",
+      "value": null
+    },

@@ -1,0 +1,203 @@
+Out for hand:
+ 
+{
+          "func": "CALL",
+          "widget": "displaytimer",
+          "routine": "startRoutine"
+        }
+ +
+enlever display: true
+
+=============================
+
+{
+  "type": "timer",
+  "id": "displaytimer",
+
+  "x": -100,
+  "y": 0,
+  "width": 74,
+  "height": 30,
+
+  "z": 17,
+
+  "movable": false,
+  "movableInEdit": true,
+
+  "alert": true,
+  "countdown": true,
+  "end": 0,
+  "start": 3000,
+
+  "millisecondsChangeRoutine": [
+    {
+      "func": "IF",
+      "operand1": "${PROPERTY milliseconds}",
+      "relation": "<=",
+      "operand2": 0,
+      "thenRoutine": [
+        {
+          "func": "SET",
+          "collection": [
+            "score_table"
+          ],
+          "property": "display",
+          "value": true
+        },
+        {
+          "func": "SET",
+          "collection": [
+            "thisButton"
+          ],
+          "property": "paused",
+          "value": true
+        }
+      ],
+      "elseRoutine": [
+        {
+          "func": "SET",
+          "collection": [
+            "score_table"
+          ],
+          "property": "display",
+          "value": false
+        }
+      ]
+    }
+  ],
+  "startRoutine": [
+    {
+      "func": "SET",
+      "collection": [
+        "thisButton"
+      ],
+      "property": "paused",
+      "value": null
+    },
+    {
+      "func": "TIMER",
+      "collection": "thisButton",
+      "mode": "reset"
+    },
+    {
+      "func": "TIMER",
+      "mode": "start",
+      "timer": "displaytimer"
+    }
+  ]
+}
+
+
+======
+
+score_table : movable true
+
+
+
+
+========
+
+{
+  "type": "button",
+  "id": "playAgain",
+
+  "parent": "score_table",
+
+  "x": 149,
+  "y": 309,
+  "width": 250,
+  "height": 65,
+  "borderRadius": 25,
+  "scale": 0.8,
+
+  "layer": 10,
+  "z": 14,
+
+  "color": "lightgray",
+  "inheritFrom": {
+    "MasterButtonTemplate": [
+      "!parent"
+    ]
+  },
+
+  "background-color": "VTTblue",
+  "border-color": "",
+  "border-style": "solid",
+  "border-width": 1,
+  "buttonText": "PLAY AGAIN",
+  "flex-order": 100,
+  "font_size": "40",
+  "tributeArray": [
+    2,
+    1,
+    4
+  ],
+
+  "clickRoutine": [
+    {
+      "func": "SET",
+      "collection": [
+        "score_table"
+      ],
+      "property": "display",
+      "value": false
+    },
+    "var tributeArray = []",
+    "var tributeArray = ${PROPERTY seatOrderArray OF outForHandButton}",
+    {
+      "func": "SET",
+      "collection": [
+        "thisButton"
+      ],
+      "property": "tributeArray",
+      "value": "${tributeArray}"
+    },
+    "var seatOrderArray = []",
+    {
+      "func": "SET",
+      "collection": [
+        "outForHandButton"
+      ],
+      "property": "seatOrderArray",
+      "value": "${seatOrderArray}"
+    },
+    "var scoringArray = []",
+    {
+      "func": "SET",
+      "collection": [
+        "outForHandButton"
+      ],
+      "property": "scoringArray",
+      "value": "${scoringArray}"
+    },
+    {
+      "func": "SET",
+      "collection": [
+        "outForHandButton"
+      ],
+      "property": "round_end",
+      "value": "false"
+    },
+    {
+      "func": "CLICK",
+      "collection": [
+        "dealB"
+      ]
+    },
+  {
+      "func": "SET",
+      "collection": [
+        "score_table"
+      ],
+      "property": "x",
+      "value": "525"
+    }, {
+      "func": "SET",
+      "collection": [
+        "score_table"
+      ],
+      "property": "y",
+      "value": "220"
+    }
+  ]
+}

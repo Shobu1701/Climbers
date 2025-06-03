@@ -1,0 +1,66 @@
+code for bomb scoring:
+----------------------------
+
+"bombArray": [],
+----
+(in "scoringRoutine")
+{
+      "func": "CALL",
+      "routine": "bombDetectionRoutine"
+    },
+
+
+"var bombArray = ${PROPERTY bombArray}",
+------------
+
+"bombDetectionRoutine": [
+
+  {
+          "func": "FOREACH",
+          "in": "${PROPERTY seatOrderArray}",
+          "loopRoutine": [
+
+
+GET player card into collection
+
+
+
+"var counts = []",
+ {
+   "func": "FOREACH",
+   "in": "[2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A]",
+   "loopRoutine": [
+     "var currentValue = ${value}",
+     "var count = 0",
+     {
+       "func": "FOREACH",
+       "in": "${playercardcollection}",
+       "loopRoutine": [
+         "var check = ${value} == ${currentValue}",
+         {
+           "func": "IF",
+           "condition": "${check}",
+           "thenRoutine": [
+             "var count = ${count} + 1"
+           ]
+         }
+       ]
+     },
+     "var counts.$key = ${count}"
+   ]
+ }
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+]
