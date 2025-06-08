@@ -1,0 +1,104 @@
+{
+  "type": "timer",
+  "id": "passTimer",
+
+  "x": -163,
+  "y": 722,
+  "width": 74,
+  "height": 30,
+
+  "z": 33398,
+
+  "movable": false,
+  "movableInEdit": true,
+
+  "countdown": true,
+  "css": "color:black",
+  "precision": 100,
+
+  "seatNum": "1",
+
+  "clickRoutine": [
+    {
+      "func": "CALL",
+      "routine": "startRoutine"
+    }
+  ],
+  "millisecondsChangeRoutine": [
+    {
+      "func": "IF",
+      "condition": "${PROPERTY paused}",
+      "thenRoutine": [],
+      "elseRoutine": [
+        {
+          "func": "IF",
+          "operand1": "${PROPERTY milliseconds}",
+          "relation": "<=",
+          "operand2": 0,
+          "thenRoutine": [
+            {
+              "func": "TIMER",
+              "mode": "pause",
+              "timer": "passTimer"
+            }
+          ],
+          "elseRoutine": [
+            {
+              "func": "IF",
+              "operand1": "${PROPERTY milliseconds}",
+              "relation": "==",
+              "operand2": 100,
+              "thenRoutine": [
+                {
+                  "func": "SELECT",
+                  "property": "id",
+                  "value": "passIcon${PROPERTY seatNum}"
+                },
+                {
+                  "func": "SET",
+                  "property": "scale",
+                  "value": 0.6
+                },
+                {
+                  "func": "CALL",
+                  "widget": "changeTurnB",
+                  "routine": "changeTurnRoutine",
+                  "arguments": {
+                    "autoplayCards": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "startRoutine": [
+    {
+      "func": "CALL",
+      "widget": "changeTurnB",
+      "routine": "changeTurnRoutine",
+      "arguments": {
+        "autoplayCards": true
+      }
+    },
+    {
+      "func": "SELECT",
+      "property": "id",
+      "value": "passIcon${PROPERTY seatNum}"
+    },
+    {
+      "func": "SET",
+      "property": "scale",
+      "value": 0.6
+    }
+  ]
+}
+
+
+ 
+
+
+
+          

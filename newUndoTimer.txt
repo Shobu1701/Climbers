@@ -1,0 +1,104 @@
+{
+  "type": "timer",
+  "id": "undoTimer",
+
+  "x": -144,
+  "y": 666,
+  "width": 74,
+  "height": 30,
+
+  "z": 33400,
+
+  "movable": false,
+  "movableInEdit": true,
+
+ 
+
+  "clickRoutine": [],
+  "millisecondsChangeRoutine": [],
+  "pausedChangeRoutine": [],
+  "startRoutine": [
+    {
+      "func": "SELECT",
+      "property": "id",
+      "value": "movingMeldCard",
+      "collection": "movingMeldCard"
+    },
+   
+   
+    {
+      "func": "CALL",
+      "routine": "changeTurnRoutine",
+      "arguments": {
+        "autoplayCards": true
+      },
+      "widget": "changeTurnB"
+    },
+  
+    {
+      "func": "CALL",
+      "widget": "playerVariables",
+      "routine": "ownedCardCountRoutine"
+    },
+    "var meldDestination = ${PROPERTY meldDestination OF playerVariables}",
+    {
+      "func": "SELECT",
+      "property": "id",
+      "value": "movingMeldCard"
+    },
+    {
+      "func": "SET",
+      "property": "x",
+      "value": "${PROPERTY x OF $meldDestination}"
+    },
+    {
+      "func": "SET",
+      "property": "y",
+      "value": "${PROPERTY y OF $meldDestination}"
+    },
+    
+   
+    {
+      "func": "SELECT",
+      "property": "component",
+      "value": "playArea"
+    },
+    {
+      "func": "FOREACH",
+      "loopRoutine": [
+        {
+          "func": "CALL",
+          "routine": "centerCardsRoutine",
+          "widget": "${widgetID}"
+        }
+      ]
+    },
+    {
+      "func": "SELECT",
+      "property": "id",
+      "value": "movingMeldCard",
+      "collection": "movingMeldCard"
+    },
+    {
+      "func": "SET",
+      "collection": "movingMeldCard",
+      "property": "onlyVisibleForSeat",
+      "value": "${visibleForSeatArray}"
+    },
+    {
+      "func": "SET",
+      "collection": "movingMeldCard",
+      "property": "parent",
+      "value": "offScreenH"
+    },
+    {
+      "func": "MOVEXY",
+      "from": "offScreenH",
+      "count": 1,
+      "face": 0,
+      "x": "${seatX}",
+      "y": "${seatY}",
+      "resetOwner": false
+    }
+  ]
+}
